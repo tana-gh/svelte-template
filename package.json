@@ -10,7 +10,8 @@
     "build": "rm -rf dist/* && webpack --config ./build/webpack.prod.config.js && (if [ -e LICENSE ]; then cp LICENSE dist; fi) && yarn licenses list > THIRD_PARTY && cp THIRD_PARTY dist"
   },
   "dependencies": {
-    "@babel/runtime": "^7.14.0"
+    "@babel/runtime": "^7.14.0",
+    "svelte-router-spa": "^6.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
