@@ -1,5 +1,4 @@
 import { writable    } from 'svelte/store'
-import { helloSocket } from '../utils/webSockets'
 import { helloString } from '../utils/strings'
 
 export const state = writable({
@@ -49,7 +48,7 @@ export const removeContent = (index: number): void => {
 }
 
 export const sendHello = (hello: string): void => {
-    helloSocket.send(hello)
+    setTimeout(() => receiveHello(hello), 1000)
 }
 
 export const receiveHello = (hello: string): void => {

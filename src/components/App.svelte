@@ -1,38 +1,38 @@
 <script lang="ts">
-import { Router }   from 'svelte-router-spa'
-import Layout       from './Layout.svelte'
-import IndexPage    from './IndexPage.svelte'
-import HelloPage    from './HelloPage.svelte'
-import NotFoundPage from './NotFoundPage.svelte'
+import { Router, Route }     from 'svelte-routing'
+import IndexPage             from './IndexPage.svelte'
+import HelloPage             from './HelloPage.svelte'
+import NotFoundPage          from './NotFoundPage.svelte'
+import { state, setLoading } from '../store'
 
-const routes = [
-    {
-        name: '/',
-        component: IndexPage,
-        layout: Layout
-    },
-    {
-        name: '/hello',
-        component: HelloPage,
-        layout: Layout,
-        nestedRoutes: [
-            {
-                name: '/hello/:name',
-                component: HelloPage,
-                layout: Layout
-            }
-        ]
-    },
-    {
-        name: '404',
-        path: '404',
-        component: NotFoundPage,
-        layout: Layout
-    }
-]
+export let url = ''
+
+let loading: boolean
+
+state.subscribe(s => loading = s.loading)
+
+setTimeout(() => setLoading(false), 1000)
 </script>
 
-<Router {routes}/>
+<template>
+    <Router {url}>
+        <header>
+            <div>
+                <h1>Svelte Page</h1>
+            </div>
+        </header>
+        <main>
+            { #if loading }
+                <p>Loading...</p>
+            { :else }
+                <Route path="/hello/:name" component={HelloPage}/>
+                <Route path="/hello"       component={HelloPage}/>
+                <Route path="/"            component={IndexPage}/>
+                <Route                     component={NotFoundPage}/>
+            { /if }
+        </main>
+    </Router>
+</template>
 
 <style lang="scss">
 </style>

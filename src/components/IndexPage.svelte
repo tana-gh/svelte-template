@@ -1,11 +1,11 @@
 <script lang="ts">
-import { navigateTo } from 'svelte-router-spa'
+import { navigate } from 'svelte-routing'
 </script>
 
 <template>
     <article>
         <div>
-            <button on:click={() => navigateTo('/hello')}>Hello</button>
+            <button on:click={() => navigate('/hello')}>Hello</button>
         </div>
     </article>
 </template>
